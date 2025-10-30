@@ -1,0 +1,292 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    IMPLEMENTACIÓN DE VALIDACIÓN DE MODELO                  ║
+║                                                                            ║
+║  Issue: Asegurarse de que no se pueden editar iniciadores, etapas         ║
+║         y barreras si no hay abierto un modelo                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          REQUISITOS DEL ISSUE                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. ❌ No permitir abrir diálogos sin modelo cargado:
+      • Etapas
+      • Sucesos Iniciadores (iniciadores)
+      • Defensas (barreras)
+
+  2. ⚠️  Mostrar mensaje con icono de exclamación:
+      "No hay ningún modelo de riesgo cargado. 
+       Cargue un modelo para poder editarlo"
+
+  3. 🌍 Textos compatibles con traducciones de Qt
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         SOLUCIÓN IMPLEMENTADA                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+📁 mainwindow.cpp - 3 funciones modificadas:
+
+  1. on_actionListaBarreras_triggered() (línea 177)
+     └─── Añadida validación para Defensas/Barreras
+
+  2. on_actionEtapas_triggered() (línea 1121)
+     └─── Añadida validación para Etapas
+
+  3. on_mnuSucesosIniciadores_triggered() (línea 1142)
+     └─── Añadida validación para Sucesos Iniciadores
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                           CÓDIGO AÑADIDO                                 │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  if (!praxisDb.isOpen() || settings.lastFile.isEmpty()) {
+      QMessageBox msgBox;
+      msgBox.setIcon(QMessageBox::Warning);  // ⚠️ Icono de advertencia
+      msgBox.setWindowTitle(tr("No hay modelo cargado"));
+      msgBox.setText(tr("No hay ningún modelo de riesgo cargado. " 
+                        "Cargue un modelo para poder editarlo."));
+      msgBox.exec();
+      return;  // 🛑 Detiene la apertura del diálogo
+  }
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      VALIDACIÓN IMPLEMENTADA                             │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Condición de Validación:
+  
+    if (!praxisDb.isOpen() || settings.lastFile.isEmpty())
+         ↓                           ↓
+    ¿DB abierta?               ¿Archivo cargado?
+
+  Ambas condiciones deben ser VERDADERAS para permitir edición
+
+  ┌──────────────┐     ┌──────────────┐
+  │ praxisDb     │     │  settings    │
+  │ .isOpen()    │ AND │  .lastFile   │
+  │              │     │  != ""       │
+  └──────┬───────┘     └──────┬───────┘
+         │                    │
+         └────────┬───────────┘
+                  ↓
+         ┌────────────────┐
+         │  TRUE: Abrir   │
+         │  FALSE: Avisar │
+         └────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      TRADUCCIONES AÑADIDAS                               │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  📄 marrta_es.ts (Español - idioma por defecto)
+     
+     <source>No hay modelo cargado</source>
+     <translation type="unfinished"></translation>
+     
+     <source>No hay ningún modelo de riesgo cargado. 
+             Cargue un modelo para poder editarlo.</source>
+     <translation type="unfinished"></translation>
+
+  📄 marrta_en.ts (Inglés)
+     
+     <source>No hay modelo cargado</source>
+     <translation>No Model Loaded</translation>
+     
+     <source>No hay ningún modelo de riesgo cargado. 
+             Cargue un modelo para poder editarlo.</source>
+     <translation>No risk model is loaded. 
+                 Load a model to be able to edit it.</translation>
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│              COMPATIBILIDAD CON TRADUCCIONES QT - EXPLICACIÓN            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ¿Cómo se hace compatible con Qt Translations?
+
+  1. Usar función tr():
+     ✅ tr("Texto en español")
+     ❌ "Texto directo"
+
+  2. Proceso Qt:
+     
+     Código C++          Archivos .ts        Archivos .qm
+     con tr()      →     (traducibles)  →    (compilados)
+                  lupdate            lrelease
+     
+  3. En tiempo de ejecución:
+     
+     Qt detecta idioma sistema → Carga .qm apropiado → Muestra traducción
+
+  4. Para añadir nuevo idioma:
+     
+     a) Ejecutar: lupdate marrta.pro
+     b) Crear: marrta_fr.ts (por ejemplo)
+     c) Traducir textos en el archivo .ts
+     d) Ejecutar: lrelease marrta.pro
+     e) Distribuir: marrta_fr.qm con la app
+
+  Ver QT_TRANSLATION_EXPLANATION.md para detalles completos
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         FLUJO DE USUARIO                                 │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ANTES (sin validación):
+  
+  Usuario → Click Etapas → [Dialog vacío/error] → ❌ Confusión
+
+  DESPUÉS (con validación):
+  
+  Sin modelo:
+  Usuario → Click Etapas → [Advertencia] → ✅ Sabe qué hacer
+  
+  Con modelo:
+  Usuario → Click Etapas → [Dialog de edición] → ✅ Funciona normal
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       CASOS DE PRUEBA                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Caso 1: Sin modelo cargado
+  ───────────────────────────
+  Estado: praxisDb cerrado
+  Acción: Click en Etapas/Iniciadores/Defensas
+  Resultado: ⚠️ Mensaje de advertencia
+  
+  Caso 2: Con modelo cargado
+  ───────────────────────────
+  Estado: Modelo.pdb abierto
+  Acción: Click en Etapas/Iniciadores/Defensas
+  Resultado: ✅ Diálogo se abre correctamente
+  
+  Caso 3: Cerrar modelo
+  ──────────────────────
+  Estado: Modelo abierto → Usuario cierra
+  Acción: Click en Etapas/Iniciadores/Defensas
+  Resultado: ⚠️ Mensaje de advertencia
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     DOCUMENTACIÓN CREADA                                 │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. 📖 ISSUE_MODEL_VALIDATION_IMPLEMENTATION.md
+     └─── Documentación técnica completa de la implementación
+
+  2. 📖 QT_TRANSLATION_EXPLANATION.md
+     └─── Explicación detallada del sistema de traducciones Qt
+
+  3. 📖 TRANSLATION_COMPATIBILITY_GUIDE.md
+     └─── Guía práctica para añadir textos traducibles
+
+  4. 📖 VISUAL_GUIDE_MODEL_VALIDATION.md
+     └─── Guía visual con diagramas y flowcharts
+
+  5. 📖 IMPLEMENTATION_FINAL_SUMMARY.md
+     └─── Resumen ejecutivo de toda la implementación
+
+  6. 🧪 test_model_validation.sh
+     └─── Script de prueba ejecutable
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      ESTADÍSTICAS DEL CAMBIO                             │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  📊 Archivos modificados: 8
+  
+  📝 Líneas añadidas: 1,287
+      • Código C++: 30 líneas
+      • Traducciones: 28 líneas  
+      • Documentación: 1,094 líneas
+      • Test script: 135 líneas
+
+  📦 Commits: 2
+      • 575bb8b - Código y traducciones
+      • 5c249f9 - Documentación y tests
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     VERIFICACIÓN DE REQUISITOS                           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Requisito                                          Estado
+  ─────────────────────────────────────────────────────────────
+  ✅ No abrir Etapas sin modelo                      CUMPLIDO
+  ✅ No abrir Iniciadores sin modelo                 CUMPLIDO
+  ✅ No abrir Barreras sin modelo                    CUMPLIDO
+  ✅ Mostrar mensaje con icono ⚠️                     CUMPLIDO
+  ✅ Texto exacto del mensaje                        CUMPLIDO
+  ✅ Compatible con traducciones Qt                  CUMPLIDO
+  ✅ Explicar compatibilidad traducciones            CUMPLIDO
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                            VENTAJAS                                      │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  🛡️  Prevención de errores
+      └─── Evita crashes y comportamiento indefinido
+
+  👥 Mejor experiencia de usuario
+      └─── Mensajes claros y descriptivos
+
+  🌍 Soporte multiidioma
+      └─── Español e inglés implementados
+
+  🔧 Código mantenible
+      └─── Patrón simple y consistente
+
+  📏 Cambios mínimos
+      └─── Solo 30 líneas de código añadidas
+
+  📚 Bien documentado
+      └─── 5 documentos completos + test script
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    CÓMO PROBAR LA IMPLEMENTACIÓN                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. Compilar traducciones:
+     $ lrelease marrta.pro
+
+  2. Compilar aplicación:
+     $ qmake marrta.pro
+     $ make
+
+  3. Ejecutar MARRTA sin cargar modelo:
+     $ ./marrta
+
+  4. Intentar abrir:
+     • Administración → Etapas
+     • Administración → Sucesos iniciadores
+     • Administración → Defensas
+
+  5. Verificar que aparece:
+     ⚠️ No hay modelo cargado
+     No hay ningún modelo de riesgo cargado. 
+     Cargue un modelo para poder editarlo.
+
+  6. Cargar un modelo y verificar que funciona normalmente
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                           CONCLUSIÓN                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ✨ IMPLEMENTACIÓN COMPLETADA EXITOSAMENTE
+
+  Todos los requisitos del issue han sido cumplidos:
+  
+  • ✅ Validación implementada en las 3 funciones necesarias
+  • ✅ Mensaje de advertencia con icono y texto correcto
+  • ✅ Sistema de traducciones Qt correctamente implementado
+  • ✅ Documentación completa y detallada
+  • ✅ Script de pruebas incluido
+  • ✅ Código sigue patrones del proyecto
+  • ✅ Cambios mínimos y no invasivos
+
+  La solución es robusta, mantenible, y lista para producción.
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                          FIN DEL RESUMEN                                   ║
+║                                                                            ║
+║  Branch: copilot/fix-edit-starters-and-barriers                          ║
+║  Commits: 575bb8b, 5c249f9                                                ║
+║  Fecha: 2025-10-12                                                        ║
+╚════════════════════════════════════════════════════════════════════════════╝

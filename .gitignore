@@ -1,0 +1,32 @@
+/marr.pro.user
+marr.pro.user*
+/build
+/.idea
+.DS_Store
+marr.code-workspace
+resources/logos/*_old.png
+/.qtc_clangd
+
+# Build artifacts
+ui_*.h
+*.exe
+*.o
+*.obj
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+Makefile
+Makefile.*
+*.pro.user
+*.pro.user.*
+.qmake.stash
+
+# Build directories
+Desktop_Qt_*/
+build-*/
+debug/
+release/
+/.qtc_clangd
+__pycache__/
+.qtc*
+test.db

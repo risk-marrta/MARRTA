@@ -1,0 +1,508 @@
+/* MARRTA Document Styles - Qt 6.8.0 Optimized */
+
+* {
+  box-sizing: border-box;
+}
+
+@page { 
+  size: A4 portrait; 
+  margin: 15mm; 
+}
+
+/* Print-specific styles for PDF export */
+@media print {
+  table {
+    border-collapse: collapse !important;
+  }
+  
+  table th, table td {
+    border: 1px solid #000 !important;
+    padding: 8px !important;
+  }
+  
+  .initiator-card {
+    border: 2px solid #4F81BD !important;
+    page-break-inside: avoid;
+  }
+  
+  .defense-item {
+    border-bottom: 1px solid #CCCCCC !important;
+    padding: 10px 0 !important;
+  }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: #333333;
+  background: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+/* Main Title / Cover Styles */
+.cover-title {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 40px 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.cover-title h1 {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 40px 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+  font-size: 2.0em;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.cover-title h2 {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 40px 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: normal;
+  line-height: 1.4;
+}
+
+/* Index Styles */
+.indice-entry {
+  color: #4F81BD;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.indice-entry:hover {
+  text-decoration: underline;
+}
+
+/* Section Title (right-aligned variant) */
+.section-title {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 50px 30px;
+  text-align: right;
+  margin: 30px 0 20px 0;
+  font-size: 1.6em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  display: block;
+}
+
+/* Section Headers */
+.section-header {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 50px 30px;
+  margin: 30px 0 20px 0;
+  font-size: 1.6em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  display: block;
+}
+
+.subsection-header {
+  background-color: #6B9FD4;
+  color: #ffffff;
+  padding: 12px 20px;
+  margin: 20px 0 15px 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  width: 100%;
+  display: block;
+}
+
+/* Content Blocks */
+.content-block {
+  background-color: #ffffff;
+  border: 1px solid #DDDDDD;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+}
+
+.content-block h3 {
+  color: #4F81BD;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.content-block p {
+  margin-bottom: 10px;
+}
+
+/* Initiator Card */
+.initiator-card {
+  border: 2px solid #4F81BD;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  display: block;
+  width: 100%;
+}
+
+.initiator-header {
+  background-color: #F5F5F5;
+  padding: 15px 20px;
+  border-bottom: 2px solid #4F81BD;
+  display: block;
+}
+
+.initiator-code {
+  font-weight: bold;
+  color: #4F81BD;
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.initiator-title {
+  font-size: 0.95em;
+  line-height: 1.5;
+  display: block;
+}
+
+.initiator-type-bar {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-weight: bold;
+  display: table;
+  width: 100%;
+}
+
+.initiator-type-bar span {
+  display: table-cell;
+  padding-right: 20px;
+}
+
+.initiator-description {
+  padding: 20px;
+  background-color: #ffffff;
+  line-height: 1.7;
+  border-bottom: 1px solid #DDDDDD;
+  display: block;
+}
+
+/* Defense Sections */
+.defense-section {
+  padding: 20px;
+  background-color: #ffffff;
+  display: block;
+}
+
+.defense-section h4 {
+  color: #ffffff;
+  background-color: #4F81BD;
+  padding: 10px 15px;
+  margin: 0 -20px 15px -20px;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.defense-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #DDDDDD;
+  display: block;
+  width: 100%;
+}
+
+.defense-item:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.defense-item:last-child {
+  border-bottom: none;
+}
+
+.defense-item > div:first-child {
+  width: 150px;
+  float: left;
+  padding-right: 15px;
+}
+
+.defense-item > div:last-child {
+  margin-left: 165px;
+}
+
+.defense-code {
+  font-weight: bold;
+  color: #4F81BD;
+  display: block;
+}
+
+.defense-description {
+  line-height: 1.6;
+  color: #333333;
+  margin-top: 5px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #ffffff;
+  display: table;
+}
+
+table thead {
+  background-color: #4F81BD;
+  color: #ffffff;
+}
+
+table th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+  background-color: #4F81BD;
+  color: #ffffff;
+}
+
+table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #DDDDDD;
+  line-height: 1.6;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #F5F5F5;
+}
+
+/* Summary Table */
+.summary-table {
+  border: 2px solid #4F81BD;
+}
+
+.summary-table th {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 15px;
+  font-size: 1em;
+}
+
+.summary-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.summary-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Stage List */
+.stage-list {
+  background-color: #ffffff;
+  border: 1px solid #DDDDDD;
+  padding: 0;
+  margin: 20px 0;
+  display: block;
+  width: 100%;
+}
+
+.stage-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid #DDDDDD;
+  display: block;
+  width: 100%;
+  position: relative;
+  min-height: 40px;
+}
+
+.stage-item:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.stage-item:last-child {
+  border-bottom: none;
+}
+
+.stage-code {
+  font-weight: bold;
+  color: #4F81BD;
+  margin-right: 15px;
+  float: left;
+  display: inline-block;
+}
+
+.stage-name {
+  font-style: italic;
+  display: inline-block;
+  max-width: calc(100% - 200px);
+}
+
+.stage-count {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+  float: right;
+  display: inline-block;
+}
+
+/* Risk Profile */
+.risk-profile {
+  display: table;
+  width: 100%;
+  margin: 30px 0;
+  border-spacing: 20px 0;
+}
+
+.risk-card {
+  background-color: #ffffff;
+  border: 2px solid #DDDDDD;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+  display: table-cell;
+  width: 25%;
+  vertical-align: top;
+}
+
+.risk-card.medium {
+  border-color: #FFA500;
+  background-color: #FFF8E1;
+}
+
+.risk-card.high {
+  border-color: #FF6B6B;
+  background-color: #FFE8E8;
+}
+
+.risk-number {
+  font-size: 3em;
+  font-weight: bold;
+  color: #4F81BD;
+  margin: 10px 0;
+  display: block;
+}
+
+.risk-label {
+  font-size: 1em;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+}
+
+/* Lists */
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #DDDDDD;
+  background-color: #ffffff;
+  display: block;
+}
+
+.item-list li:nth-child(even) {
+  background-color: #F5F5F5;
+}
+
+.item-code {
+  font-weight: bold;
+  color: #4F81BD;
+  margin-right: 10px;
+}
+
+/* Page Header */
+.page-header {
+  background-color: #4F81BD;
+  color: #ffffff;
+  padding: 15px 30px;
+  font-weight: bold;
+  text-align: right;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  width: 100%;
+}
+
+/* Page break and page number */
+.page-break { 
+  page-break-after: always; 
+}
+
+.page-number { 
+  position: fixed; 
+  bottom: 10mm; 
+  right: 15mm; 
+  font-size: 9pt; 
+  color: #666; 
+}
+
+.centered-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .cover-title h1 {
+    font-size: 1.8em;
+  }
+  
+  .cover-title h2 {
+    font-size: 1.2em;
+  }
+  
+  .defense-item > div:first-child {
+    width: 100%;
+    float: none;
+    margin-bottom: 5px;
+  }
+  
+  .defense-item > div:last-child {
+    margin-left: 0;
+  }
+  
+  table {
+    font-size: 0.9em;
+  }
+  
+  .risk-profile {
+    display: block;
+  }
+  
+  .risk-card {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .stage-name {
+    max-width: calc(100% - 150px);
+  }
+}
