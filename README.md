@@ -63,12 +63,12 @@ See the [examples directory](examples/scripting/) for more scripts.
 
 ## Version
 
-Current version: 2.0.0 (2025-10-24)
+Current version: 2.0.1 (2025-10-26)
 
 ## Support
 
 For issues, questions, or contributions, please visit:
-https://github.com/theotocopulitos/MARRTA
+https://github.com/theotocopulitos/MARRTA or email matrices.marrta@gmail.com
 
 ## License
 
