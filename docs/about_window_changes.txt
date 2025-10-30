@@ -1,0 +1,100 @@
+
+═══════════════════════════════════════════════════════════════════════════════
+                    MARRTA ABOUT WINDOW - HEADER OPTIMIZATION
+═══════════════════════════════════════════════════════════════════════════════
+
+ISSUE REQUIREMENTS:
+  1. Cambiar la posición del texto y el icono: icono a la izquierda, textos a la derecha
+  2. Añadir número de compilación (último commit) entre [] en la línea de versión
+
+═══════════════════════════════════════════════════════════════════════════════
+                               BEFORE (Original)
+═══════════════════════════════════════════════════════════════════════════════
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  Acerca de                                                           │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│    ┌───────────────────────────────┐              ┌──────────┐     │
+│    │  MARRTA                        │              │          │     │
+│    │  Versión 1.5 (2025-10-11)      │              │   LOGO   │     │
+│    │  Código de cálculo de análisis │              │          │     │
+│    │  de riesgo usando...           │              └──────────┘     │
+│    └───────────────────────────────┘                                │
+│                                                                      │
+│              [TEXTO A LA IZQUIERDA]      [ICONO A LA DERECHA]       │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+                               AFTER (Optimizado) ✅
+═══════════════════════════════════════════════════════════════════════════════
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  Acerca de                                                           │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│    ┌──────────┐       ┌───────────────────────────────────────┐    │
+│    │          │       │  MARRTA                                │    │
+│    │   LOGO   │       │  Versión 1.5 (2025-10-11) [0e42b58] ◄──────┼─ BUILD NUMBER
+│    │          │       │  Código de cálculo de análisis        │    │
+│    └──────────┘       │  de riesgo usando...                  │    │
+│                       └───────────────────────────────────────┘    │
+│                                                                      │
+│       [ICONO A LA IZQUIERDA]         [TEXTO A LA DERECHA]           │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+                            CAMBIOS IMPLEMENTADOS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. ARCHIVO: about.ui
+   └─ Intercambio de posiciones en horizontalLayout_header:
+      • ANTES: [Spacer] → [Texto] → [Spacer] → [Logo] → [Spacer]
+      • AHORA: [Spacer] → [Logo] → [Spacer] → [Texto] → [Spacer]
+
+2. ARCHIVO: marrta.pro
+   └─ Nuevo código para extraer hash de commit:
+      GIT_COMMIT = $$system(git log -1 --format=%h)
+      isEmpty(GIT_COMMIT) {
+          GIT_COMMIT = "unknown"
+      }
+      DEFINES += GIT_COMMIT=\"$$GIT_COMMIT\"
+
+3. ARCHIVO: about.cpp
+   └─ Lógica para añadir número de compilación:
+      #ifdef GIT_COMMIT
+          strEtVersion += " [" + QString(GIT_COMMIT) + "]";
+      #endif
+
+═══════════════════════════════════════════════════════════════════════════════
+                              EJEMPLO DE VERSIÓN
+═══════════════════════════════════════════════════════════════════════════════
+
+  ANTES:  Versión 1.5 (2025-10-11)
+  
+  AHORA:  Versión 1.5 (2025-10-11) [0e42b58]
+                                      ^^^^^^^
+                                      Hash del commit (número de compilación)
+
+═══════════════════════════════════════════════════════════════════════════════
+                                 BENEFICIOS
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ Mejor equilibrio visual con el icono a la izquierda
+✅ Trazabilidad exacta de la versión compilada
+✅ Facilita la depuración y soporte técnico
+✅ Cambios mínimos y quirúrgicos (solo 3 archivos modificados)
+
+═══════════════════════════════════════════════════════════════════════════════
+                           ARCHIVOS MODIFICADOS (5)
+═══════════════════════════════════════════════════════════════════════════════
+
+  1. about.ui                              - Layout header swap
+  2. about.cpp                             - Build number logic
+  3. marrta.pro                            - Git commit extraction
+  4. ABOUT_WINDOW_HEADER_OPTIMIZATION.md   - Documentation
+  5. ABOUT_WINDOW_HEADER_VISUAL.md         - Visual comparison
+
+═══════════════════════════════════════════════════════════════════════════════

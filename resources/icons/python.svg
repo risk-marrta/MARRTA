@@ -1,0 +1,10 @@
+<svg role="img" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" aria-labelledby="pythonIconTitle" stroke="#2329D6" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#2329D6">
+  <title id="pythonIconTitle">Python</title>
+  <!-- Python logo outline - top snake head -->
+  <path d="M 8 4 L 16 4 C 18 4 19 5 19 7 L 19 10 L 13 10 L 13 11 L 19 11 L 19 12 L 12 12"/>
+  <!-- Python logo outline - bottom snake head -->
+  <path d="M 16 20 L 8 20 C 6 20 5 19 5 17 L 5 14 L 11 14 L 11 13 L 5 13 L 5 12 L 12 12"/>
+  <!-- Eye dots matching Python logo -->
+  <circle cx="10" cy="7" r="0.8" fill="#2329D6"/>
+  <circle cx="14" cy="17" r="0.8" fill="#2329D6"/>
+</svg>

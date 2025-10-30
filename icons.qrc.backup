@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>resources/icons/chevron-down.svg</file>
+        <file>resources/icons/chevron-up.svg</file>
+        <file>resources/icons/new.svg</file>
+        <file>resources/icons/remove.svg</file>
+        <file>resources/icons/dashboard.svg</file>
+        <file>resources/icons/close.svg</file>
+        <file>resources/icons/circle-ok.svg</file>
+        <file>resources/icons/trending-down.svg</file>
+        <file>resources/icons/box.svg</file>
+        <file>resources/icons/activity.svg</file>
+        <file>resources/icons/print.svg</file>
+        <file>resources/icons/celluar.svg</file>
+        <file>resources/icons/upload.svg</file>
+        <file>resources/icons/book-opened.svg</file>
+        <file>resources/icons/line-chart.svg</file>
+        <file>resources/icons/news.svg</file>
+        <file>resources/icons/save.svg</file>
+        <file>resources/icons/checked.svg</file>
+        <file>resources/icons/no-entry.svg</file>
+        <file>resources/icons/stop.svg</file>
+        <file>resources/icons/next.svg</file>
+        <file>resources/icons/info.svg</file>
+        <file>resources/icons/excel.svg</file>
+    </qresource>
+</RCC>

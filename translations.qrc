@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>marrta_en.ts</file>
+        <file>marrta_es.ts</file>
+        <file>marrta_en.qm</file>
+    </qresource>
+</RCC>

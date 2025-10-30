@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/logos">
+        <file>resources/logos/FundacionMapfre.png</file>
+        <file>resources/logos/ministerio.png</file>
+        <file>resources/logos/csn.png</file>
+        <file>resources/logos/vorticesoft.png</file>
+        <file>resources/logos/logo.png</file>
+        <file>resources/logos/aetr.png</file>
+        <file>resources/logos/sefm.png</file>
+        <file>resources/logos/seor.png</file>
+        <file>resources/logos/sepr.png</file>
+    </qresource>
+    <qresource prefix="/comun">
+        <file>resources/comun/matriz-de-riesgos.png</file>
+    </qresource>
+    <qresource prefix="/report">
+        <file>resources/report_style.css</file>
+    </qresource>
+</RCC>
